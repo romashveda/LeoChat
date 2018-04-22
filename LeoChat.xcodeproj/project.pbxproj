@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		194C7381208B353400ABCAD6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7380208B353400ABCAD6 /* User.swift */; };
+		194C7383208B355900ABCAD6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7382208B355900ABCAD6 /* Message.swift */; };
+		194C738E208B3D3600ABCAD6 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194C738D208B3D3600ABCAD6 /* TabBar.storyboard */; };
+		194C7390208B3F6D00ABCAD6 /* UsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C738F208B3F6D00ABCAD6 /* UsersVC.swift */; };
+		194C7392208B3FDA00ABCAD6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7391208B3FDA00ABCAD6 /* UserCell.swift */; };
+		194C7394208B4CB800ABCAD6 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7393208B4CB800ABCAD6 /* ChatVC.swift */; };
 		198E86B520890974008587A0 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E86B420890974008587A0 /* SignInVC.swift */; };
+		198E86B8208A0C00008587A0 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 198E86B6208A0C00008587A0 /* DataModel.xcdatamodeld */; };
 		19EE9FE62088D16D00F19649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE52088D16D00F19649 /* AppDelegate.swift */; };
 		19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE72088D16D00F19649 /* LoginVC.swift */; };
 		19EE9FEB2088D16D00F19649 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE9FE92088D16D00F19649 /* Main.storyboard */; };
@@ -17,7 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		194C7380208B353400ABCAD6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		194C7382208B355900ABCAD6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		194C738D208B3D3600ABCAD6 /* TabBar.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
+		194C738F208B3F6D00ABCAD6 /* UsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersVC.swift; sourceTree = "<group>"; };
+		194C7391208B3FDA00ABCAD6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
+		194C7393208B4CB800ABCAD6 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		198E86B420890974008587A0 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		198E86B7208A0C00008587A0 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		19EE9FE22088D16D00F19649 /* LeoChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeoChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EE9FE52088D16D00F19649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19EE9FE72088D16D00F19649 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -58,8 +72,30 @@
 			children = (
 				19EE9FE72088D16D00F19649 /* LoginVC.swift */,
 				198E86B420890974008587A0 /* SignInVC.swift */,
+				194C738F208B3F6D00ABCAD6 /* UsersVC.swift */,
+				194C7391208B3FDA00ABCAD6 /* UserCell.swift */,
+				194C7393208B4CB800ABCAD6 /* ChatVC.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		194C738C208B3D1100ABCAD6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				19EE9FE92088D16D00F19649 /* Main.storyboard */,
+				194C738D208B3D3600ABCAD6 /* TabBar.storyboard */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		198E86BD208B3029008587A0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				198E86B6208A0C00008587A0 /* DataModel.xcdatamodeld */,
+				194C7380208B353400ABCAD6 /* User.swift */,
+				194C7382208B355900ABCAD6 /* Message.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		19EE9FD92088D16D00F19649 = {
@@ -84,7 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				1912AAFE2089079B0065F1C9 /* SupportFiles */,
-				19EE9FE92088D16D00F19649 /* Main.storyboard */,
+				194C738C208B3D1100ABCAD6 /* Views */,
+				198E86BD208B3029008587A0 /* Model */,
 				1912AB00208908B30065F1C9 /* Controllers */,
 			);
 			path = LeoChat;
@@ -168,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194C738E208B3D3600ABCAD6 /* TabBar.storyboard in Resources */,
 				19EE9FF02088D17C00F19649 /* LaunchScreen.storyboard in Resources */,
 				19EE9FED2088D17C00F19649 /* Assets.xcassets in Resources */,
 				19EE9FEB2088D16D00F19649 /* Main.storyboard in Resources */,
@@ -244,6 +282,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */,
+				194C7383208B355900ABCAD6 /* Message.swift in Sources */,
+				194C7390208B3F6D00ABCAD6 /* UsersVC.swift in Sources */,
+				194C7394208B4CB800ABCAD6 /* ChatVC.swift in Sources */,
+				194C7381208B353400ABCAD6 /* User.swift in Sources */,
+				194C7392208B3FDA00ABCAD6 /* UserCell.swift in Sources */,
+				198E86B8208A0C00008587A0 /* DataModel.xcdatamodeld in Sources */,
 				19EE9FE62088D16D00F19649 /* AppDelegate.swift in Sources */,
 				198E86B520890974008587A0 /* SignInVC.swift in Sources */,
 			);
@@ -445,6 +489,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		198E86B6208A0C00008587A0 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				198E86B7208A0C00008587A0 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 198E86B7208A0C00008587A0 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 19EE9FDA2088D16D00F19649 /* Project object */;
 }
