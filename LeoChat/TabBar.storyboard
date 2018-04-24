@@ -110,6 +110,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="jCL-pQ-KxD" secondAttribute="trailing" constant="84" id="4oX-Al-Rpd"/>
                                         <constraint firstItem="jCL-pQ-KxD" firstAttribute="leading" secondItem="GZg-hd-eWv" secondAttribute="leading" id="U5b-l1-mnS"/>
                                         <constraint firstItem="jCL-pQ-KxD" firstAttribute="centerY" secondItem="GZg-hd-eWv" secondAttribute="centerY" id="jul-rI-tdy"/>
+                                        <constraint firstAttribute="bottom" secondItem="jCL-pQ-KxD" secondAttribute="bottom" constant="5" id="rSA-Sd-LbS"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>

@@ -73,7 +73,7 @@
                                         <state key="normal" title="Login"/>
                                         <connections>
                                             <action selector="logIn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2OZ-9L-aEy"/>
-                                            <segue destination="quF-42-eQs" kind="show" id="Q9n-Yv-aQx"/>
+                                            <segue destination="quF-42-eQs" kind="show" identifier="toTabBar" id="Q9n-Yv-aQx"/>
                                         </connections>
                                     </button>
                                 </subviews>

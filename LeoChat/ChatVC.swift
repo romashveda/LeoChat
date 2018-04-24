@@ -69,14 +69,14 @@ extension ChatVC {
         guard let message = messages?[indexPath.row] else {return UITableViewCell()}
         cell.messageText.text = message.text
         cell.messageView.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor, constant: 0)
-        NSLayoutConstraint(item: cell.messageView, attribute: .leading, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
+//        NSLayoutConstraint(item: cell.messageView, attribute: .leading, relatedBy: <#T##NSLayoutRelation#>, toItem: <#T##Any?#>, attribute: <#T##NSLayoutAttribute#>, multiplier: <#T##CGFloat#>, constant: <#T##CGFloat#>)
         if message.isSender {
             cell.messageView.backgroundColor = .blue
             cell.messageText.textColor = .white
             cell.messageText.textAlignment = .right
-//            let temp = cell.leadingConstraint.constant
-//            cell.leadingConstraint.constant = cell.trailingConstraint.constant
-//            cell.trailingConstraint.constant = temp
+            let temp = cell.leadingConstraint.constant
+            cell.leadingConstraint.constant = cell.trailingConstraint.constant
+            cell.trailingConstraint.constant = temp
         }
         return cell
     }
@@ -85,8 +85,8 @@ extension ChatVC {
 
 class ChatCell: UITableViewCell {
     
-    //@IBOutlet weak var leadingConstraint: NSLayoutConstraint!
-    //@IBOutlet weak var trailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var messageText: UILabel!{
         didSet{

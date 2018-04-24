@@ -21,20 +21,25 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email ])
+        loginButton.center = view.center
+        view.addSubview(loginButton)
+        if let accessToken = AccessToken.current {
+            print("User logged")
+            performSegue(withIdentifier: "toTabBar", sender: self)
+            // User is logged in, use 'accessToken' here.
+            // go to next VC
+        } else {
+            print("User not logged")
+        }
         self.navigationController?.isNavigationBarHidden = true
         loginTextField.delegate = self
         passTextField.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         
-        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email ])
-        loginButton.center = view.center
         
-        view.addSubview(loginButton)
-        if let accessToken = AccessToken.current {
-            performSegue(withIdentifier: "toTabBar", sender: self)
-            // User is logged in, use 'accessToken' here.
-            // go to next VC
-        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
