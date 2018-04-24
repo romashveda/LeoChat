@@ -35,11 +35,11 @@ class UsersVC: UITableViewController {
         lui.email = "\(lui.login!)@gmail.com"
         lui.pass = "1111"
         
-        createMessageWithText(text: "Hey, how are you? Will attempt to recover by breaking constraint.", user: vitalii, minutesAgo: 5,context: context)
-        createMessageWithText(text: "What's up? Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.", user: gordon, minutesAgo: 1,context: context)
-        createMessageWithText(text: "Hi!", user: vitalii, minutesAgo: 4,context: context)
-        createMessageWithText(text: "Brilliant", user: vitalii, minutesAgo: 2,context: context)
-        createMessageWithText(text: "I'm fine.", user: vitalii, minutesAgo: 1, context: context, isSender: true)
+        UsersVC.createMessageWithText(text: "Hey, how are you? Will attempt to recover by breaking constraint.", user: vitalii, minutesAgo: 5,context: context)
+        UsersVC.createMessageWithText(text: "What's up? Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.", user: gordon, minutesAgo: 1,context: context)
+        UsersVC.createMessageWithText(text: "Hi!", user: vitalii, minutesAgo: 4,context: context)
+        UsersVC.createMessageWithText(text: "Brilliant", user: vitalii, minutesAgo: 2,context: context)
+        UsersVC.createMessageWithText(text: "I'm fine.", user: vitalii, minutesAgo: 1, context: context, isSender: true)
         
         do {
             try context.save()
@@ -50,12 +50,13 @@ class UsersVC: UITableViewController {
         
     }
     
-    func createMessageWithText(text: String, user: User, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) {
+    static func createMessageWithText(text: String, user: User, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) -> Message{
         let message = Message(context: context)
         message.userTo = user
         message.text = text
         message.date = Date().addingTimeInterval(-minutesAgo*60)
         message.isSender = isSender
+        return message
     }
     
     func fetchUsers() -> [User]? {
