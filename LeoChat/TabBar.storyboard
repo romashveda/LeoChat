@@ -88,10 +88,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jCL-pQ-KxD">
-                                            <rect key="frame" x="0.0" y="5" width="275" height="50"/>
+                                            <rect key="frame" x="0.0" y="5" width="275" height="50.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HZf-vW-JMb">
-                                                    <rect key="frame" x="10" y="15" width="255" height="20"/>
+                                                    <rect key="frame" x="10" y="15" width="255" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -108,7 +108,6 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="jCL-pQ-KxD" secondAttribute="trailing" constant="84" id="4oX-Al-Rpd"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="jCL-pQ-KxD" secondAttribute="bottom" constant="-6" id="Spc-eF-t2K"/>
                                         <constraint firstItem="jCL-pQ-KxD" firstAttribute="leading" secondItem="GZg-hd-eWv" secondAttribute="leading" id="U5b-l1-mnS"/>
                                         <constraint firstItem="jCL-pQ-KxD" firstAttribute="centerY" secondItem="GZg-hd-eWv" secondAttribute="centerY" id="jul-rI-tdy"/>
                                     </constraints>
