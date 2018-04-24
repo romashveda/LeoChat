@@ -17,6 +17,5 @@ class UserCell: UITableViewCell {
 //    }
     
     @IBOutlet weak var userLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
     
 }

@@ -82,8 +82,11 @@
                                 </constraints>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYP-VK-qmi">
-                                <rect key="frame" x="137" y="100" width="100" height="50"/>
+                                <rect key="frame" x="140.5" y="100" width="93" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="93" id="18C-jU-z0A"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -94,7 +97,6 @@
                             <constraint firstItem="M0e-ug-Ewx" firstAttribute="top" secondItem="qYP-VK-qmi" secondAttribute="bottom" constant="24" id="4lf-Nm-542"/>
                             <constraint firstItem="M0e-ug-Ewx" firstAttribute="centerX" secondItem="dhG-c0-kmQ" secondAttribute="centerX" id="5R0-ar-qPD"/>
                             <constraint firstItem="qYP-VK-qmi" firstAttribute="centerX" secondItem="M0e-ug-Ewx" secondAttribute="centerX" id="6DW-Mn-Kjc"/>
-                            <constraint firstItem="qYP-VK-qmi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="137" id="FOv-p4-emu"/>
                             <constraint firstItem="qYP-VK-qmi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="N3Q-LB-DNh"/>
                             <constraint firstItem="M0e-ug-Ewx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WhJ-PM-lhx"/>
                             <constraint firstItem="dhG-c0-kmQ" firstAttribute="top" secondItem="M0e-ug-Ewx" secondAttribute="bottom" constant="28" id="a1b-Yt-ZHJ"/>

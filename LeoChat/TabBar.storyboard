@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Chats-->
         <scene sceneID="AFU-Rf-PVS">
             <objects>
-                <tableViewController id="2jB-Tw-CRC" customClass="UsersVC" customModule="LeoChat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Chats" id="2jB-Tw-CRC" customClass="UsersVC" customModule="LeoChat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="JZN-FJ-CN4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,21 +27,8 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4g-OK-DGU">
-                                            <rect key="frame" x="16" y="11" width="200" height="42"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="200" id="VJm-Gf-KFV"/>
-                                            </constraints>
+                                            <rect key="frame" x="16" y="11" width="87" height="42"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ny1-Sy-S7y">
-                                            <rect key="frame" x="16" y="57" width="313" height="32"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="32" id="LmR-Bl-3WQ"/>
-                                                <constraint firstAttribute="width" constant="313" id="Rjn-OX-QFk"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -49,13 +36,9 @@
                                     <constraints>
                                         <constraint firstItem="H4g-OK-DGU" firstAttribute="top" secondItem="fUU-VC-dwy" secondAttribute="topMargin" id="4Cl-xT-8ue"/>
                                         <constraint firstItem="H4g-OK-DGU" firstAttribute="leading" secondItem="fUU-VC-dwy" secondAttribute="leadingMargin" id="lVD-YN-Ygh"/>
-                                        <constraint firstItem="Ny1-Sy-S7y" firstAttribute="top" secondItem="H4g-OK-DGU" secondAttribute="bottom" constant="4" id="oeU-M2-WUd"/>
-                                        <constraint firstItem="H4g-OK-DGU" firstAttribute="leading" secondItem="Ny1-Sy-S7y" secondAttribute="leading" id="tYo-oK-FTh"/>
-                                        <constraint firstItem="Ny1-Sy-S7y" firstAttribute="leading" secondItem="fUU-VC-dwy" secondAttribute="leading" constant="16" id="y5v-oW-s8J"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="messageLabel" destination="Ny1-Sy-S7y" id="Gmm-wg-21g"/>
                                     <outlet property="userLabel" destination="H4g-OK-DGU" id="Iki-nE-2FP"/>
                                 </connections>
                             </tableViewCell>
@@ -150,11 +133,11 @@
             </objects>
             <point key="canvasLocation" x="-1537" y="-1408"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Chats-->
         <scene sceneID="0ie-j0-Ltw">
             <objects>
                 <tabBarController id="IlS-r0-gkp" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="N6d-10-eyZ"/>
+                    <navigationItem key="navigationItem" title="Chats" id="N6d-10-eyZ"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GLS-Er-CNn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

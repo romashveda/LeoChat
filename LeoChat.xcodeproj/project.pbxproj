@@ -14,7 +14,6 @@
 		194C7392208B3FDA00ABCAD6 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7391208B3FDA00ABCAD6 /* UserCell.swift */; };
 		194C7394208B4CB800ABCAD6 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7393208B4CB800ABCAD6 /* ChatVC.swift */; };
 		194C7398208F7D2600ABCAD6 /* Functionallity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7397208F7D2600ABCAD6 /* Functionallity.swift */; };
-		198E86B520890974008587A0 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 198E86B420890974008587A0 /* SignInVC.swift */; };
 		198E86B8208A0C00008587A0 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 198E86B6208A0C00008587A0 /* DataModel.xcdatamodeld */; };
 		19EE9FE62088D16D00F19649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE52088D16D00F19649 /* AppDelegate.swift */; };
 		19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE72088D16D00F19649 /* LoginVC.swift */; };
@@ -32,7 +31,6 @@
 		194C7391208B3FDA00ABCAD6 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		194C7393208B4CB800ABCAD6 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		194C7397208F7D2600ABCAD6 /* Functionallity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functionallity.swift; sourceTree = "<group>"; };
-		198E86B420890974008587A0 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		198E86B7208A0C00008587A0 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		19EE9FE22088D16D00F19649 /* LeoChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeoChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EE9FE52088D16D00F19649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 			isa = PBXGroup;
 			children = (
 				19EE9FE72088D16D00F19649 /* LoginVC.swift */,
-				198E86B420890974008587A0 /* SignInVC.swift */,
 				194C738F208B3F6D00ABCAD6 /* UsersVC.swift */,
 				194C7391208B3FDA00ABCAD6 /* UserCell.swift */,
 				194C7393208B4CB800ABCAD6 /* ChatVC.swift */,
@@ -293,7 +290,6 @@
 				194C7392208B3FDA00ABCAD6 /* UserCell.swift in Sources */,
 				198E86B8208A0C00008587A0 /* DataModel.xcdatamodeld in Sources */,
 				19EE9FE62088D16D00F19649 /* AppDelegate.swift in Sources */,
-				198E86B520890974008587A0 /* SignInVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -110,11 +110,21 @@ class ChatVC: UITableViewController {
             print(error)
         }
     }
+//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        viewWillAppear(true)
+//        if UIDevice.current.orientation.isLandscape{
+//            screen = UIScreen.main.bounds
+//            viewWillAppear(true)
+//        }else {
+//            screen = UIScreen.main.bounds
+//            viewWillAppear(true)
+//        }
+//    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let screen = UIScreen.main.bounds
-        
+        var screen = UIScreen.main.bounds
+
         view.addSubview(messageInputContainer)
         messageInputContainer.addSubview(textField)
         messageInputContainer.addSubview(sendButton)
@@ -167,7 +177,7 @@ extension ChatVC {
         guard let message = messages?[indexPath.row] else {return UITableViewCell()}
         cell.messageText.text = message.text
         cell.messageView.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor, constant: 0)
-        
+        cell.isUserInteractionEnabled = false
         if message.isSender {
             cell.messageView.backgroundColor = .blue
             cell.messageText.textColor = .white
