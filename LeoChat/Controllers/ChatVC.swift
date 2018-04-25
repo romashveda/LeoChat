@@ -11,6 +11,31 @@ import UIKit
 class ChatVC: UIViewController {
 
     @IBOutlet weak var chatTableView: UITableView!
+    @IBOutlet weak var messageInputView: UIView!
+    @IBOutlet weak var messageText: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var messageBottomAnchor: NSLayoutConstraint!
+    
+    @IBAction func saveMessage(_ sender: UIButton) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let context = appDelegate.persistentContainer.viewContext
+        guard let text = messageText.text else {return}
+        if text.isEmpty {
+            return
+        }
+        let message = UsersVC.createMessageWithText(text: text, user: user!, minutesAgo: 0, context: context, isSender: true)
+        do {
+            try context.save()
+            messages?.append(message)
+            let item = messages!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            chatTableView.insertRows(at: [insertionIndexPath], with: UITableViewRowAnimation.automatic)
+            chatTableView.scrollToRow(at: insertionIndexPath, at: .bottom, animated: true)
+            messageText.text = nil
+        } catch {
+            print(error)
+        }
+    }
     var messages: [Message]?
     var user: User? {
         didSet{
@@ -89,15 +114,17 @@ class ChatVC: UIViewController {
         if notification.name == Notification.Name.UIKeyboardWillShow ||
             notification.name == Notification.Name.UIKeyboardWillChangeFrame {
 //            messageInputContainer.frame.origin.y = -keyboardRect.height
-            bottomConstraint?.constant = -keyboardRect.height
+            messageBottomAnchor.constant = -keyboardRect.height
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
             }) { completed in
+                if self.messages?.count != 0 {
                 let indexPath = IndexPath(item: self.messages!.count - 1, section: 0)
                 self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                }
             }
         } else {
-            bottomConstraint?.constant = 0
+            messageBottomAnchor.constant = 0
         }
     }
     
@@ -134,28 +161,28 @@ class ChatVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         var screen = UIScreen.main.bounds
-
-        view.addSubview(messageInputContainer)
-        messageInputContainer.addSubview(textField)
-        messageInputContainer.addSubview(sendButton)
-        messageInputContainer.addSubview(borderLine)
+        messageText.placeholder = "Enter message..."
+//        view.addSubview(messageInputContainer)
+//        messageInputContainer.addSubview(textField)
+//        messageInputContainer.addSubview(sendButton)
+//        messageInputContainer.addSubview(borderLine)
         
-        bottomConstraint = messageInputContainer.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0)
-        bottomConstraint?.isActive = true
-        messageInputContainer.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
-        messageInputContainer.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        
-        textField.bottomAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
-        textField.widthAnchor.constraint(equalToConstant: screen.width - 80).isActive = true
-        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        textField.leadingAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.leadingAnchor, constant: 5).isActive = true
-        
-        sendButton.trailingAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.trailingAnchor, constant: -10).isActive = true
-        sendButton.centerYAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.centerYAnchor).isActive = true
-        
-        borderLine.topAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.topAnchor, constant: 0).isActive = true
-        borderLine.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
-        borderLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+//        bottomConstraint = messageInputContainer.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0)
+//        bottomConstraint?.isActive = true
+//        messageInputContainer.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
+//        messageInputContainer.heightAnchor.constraint(equalToConstant: 70).isActive = true
+//
+//        textField.bottomAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+//        textField.widthAnchor.constraint(equalToConstant: screen.width - 80).isActive = true
+//        textField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        textField.leadingAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.leadingAnchor, constant: 5).isActive = true
+//
+//        sendButton.trailingAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.trailingAnchor, constant: -10).isActive = true
+//        sendButton.centerYAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.centerYAnchor).isActive = true
+//
+//        borderLine.topAnchor.constraint(equalTo: messageInputContainer.layoutMarginsGuide.topAnchor, constant: 0).isActive = true
+//        borderLine.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
+//        borderLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
 
         
@@ -182,7 +209,7 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
             return UITableViewCell()
         }
         cell.messageView.layer.cornerRadius = 15
-        cell.messageView.backgroundColor = UIColor.lightGray
+        cell.messageView.backgroundColor = UIColor(red: 0.216, green: 0.217, blue: 0.233, alpha: 0.25)
         let font = UIFont(name: "Arial", size: 18)
         cell.messageText.font = font
         guard let message = messages?[indexPath.row] else {return UITableViewCell()}
@@ -190,7 +217,7 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
         cell.messageView.leadingAnchor.constraint(equalTo: cell.layoutMarginsGuide.leadingAnchor, constant: 0)
         cell.isUserInteractionEnabled = false
         if message.isSender {
-            cell.messageView.backgroundColor = .blue
+            cell.messageView.backgroundColor = .green
             cell.messageText.textColor = .white
             cell.messageText.textAlignment = .right
             let temp = cell.leadingConstraint.constant
