@@ -63,6 +63,7 @@ class LoginVC: UIViewController {
         view.addSubview(loginButton)
         if let accessToken = AccessToken.current {
             print("User logged")
+            print(accessToken.userId!)
             performSegue(withIdentifier: "toTabBar", sender: self)
             // User is logged in, use 'accessToken' here.
             // go to next VC

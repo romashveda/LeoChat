@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatVC: UITableViewController {
+class ChatVC: UIViewController {
 
     @IBOutlet weak var chatTableView: UITableView!
     var messages: [Message]?
@@ -74,6 +74,8 @@ class ChatVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         textField.delegate = self
+        chatTableView.delegate = self
+        chatTableView.dataSource = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .done, target: self, action: #selector(simulate))
         
@@ -86,9 +88,16 @@ class ChatVC: UITableViewController {
         guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
         if notification.name == Notification.Name.UIKeyboardWillShow ||
             notification.name == Notification.Name.UIKeyboardWillChangeFrame {
-            chatTableView.frame.origin.y = -keyboardRect.height
+//            messageInputContainer.frame.origin.y = -keyboardRect.height
+            bottomConstraint?.constant = -keyboardRect.height
+            UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }) { completed in
+                let indexPath = IndexPath(item: self.messages!.count - 1, section: 0)
+                self.chatTableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+            }
         } else {
-            chatTableView.frame.origin.y = 0
+            bottomConstraint?.constant = 0
         }
     }
     
@@ -120,6 +129,7 @@ class ChatVC: UITableViewController {
 //            viewWillAppear(true)
 //        }
 //    }
+    var bottomConstraint: NSLayoutConstraint?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -130,7 +140,8 @@ class ChatVC: UITableViewController {
         messageInputContainer.addSubview(sendButton)
         messageInputContainer.addSubview(borderLine)
         
-        messageInputContainer.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+        bottomConstraint = messageInputContainer.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: 0)
+        bottomConstraint?.isActive = true
         messageInputContainer.widthAnchor.constraint(equalToConstant: screen.width).isActive = true
         messageInputContainer.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
@@ -159,14 +170,14 @@ class ChatVC: UITableViewController {
 
 }
 
-extension ChatVC {
+extension ChatVC: UITableViewDelegate, UITableViewDataSource{
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = messages?.count ?? 0
         return num
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = chatTableView.dequeueReusableCell(withIdentifier: "chatCell", for: indexPath) as? ChatCell else {
             return UITableViewCell()
         }

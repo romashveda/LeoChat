@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class UsersVC: UITableViewController {
+class UsersVC: UIViewController {
     
     var users: [User] = []
     var messages: [Message] = []
@@ -53,13 +53,14 @@ class UsersVC: UITableViewController {
 
 }
 
-extension UsersVC {
+extension UsersVC: UITableViewDelegate, UITableViewDataSource {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
     
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as? UserCell else {
             return UITableViewCell()
         }
@@ -69,7 +70,7 @@ extension UsersVC {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenUser = users[indexPath.row]
         performSegue(withIdentifier: "toChatVC", sender: self)
     }
