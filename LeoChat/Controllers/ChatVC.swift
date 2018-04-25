@@ -44,61 +44,61 @@ class ChatVC: UIViewController {
             messages = messages?.sorted{$0.date! < $1.date!}
         }
     }
-    var messageInputContainer: UIView = {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(displayP3Red: 199, green: 211, blue: 211, alpha: 1)
-        return view
-    }()
+//    var messageInputContainer: UIView = {
+//        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = UIColor(displayP3Red: 199, green: 211, blue: 211, alpha: 1)
+//        return view
+//    }()
+//
+//    var textField: UITextField = {
+//        let field = UITextField()
+//        field.placeholder = "Enter message..."
+//        field.translatesAutoresizingMaskIntoConstraints = false
+//        field.backgroundColor = .white
+//        return field
+//    }()
+//
+//    var sendButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Send", for: .normal)
+//        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+//        return button
+//    }()
     
-    var textField: UITextField = {
-        let field = UITextField()
-        field.placeholder = "Enter message..."
-        field.translatesAutoresizingMaskIntoConstraints = false
-        field.backgroundColor = .white
-        return field
-    }()
+//    @objc func handleSend() {
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+//        let context = appDelegate.persistentContainer.viewContext
+//        guard let text = textField.text else {return}
+//        if text.isEmpty {
+//            return
+//        }
+//        let message = UsersVC.createMessageWithText(text: text, user: user!, minutesAgo: 0, context: context, isSender: true)
+//        do {
+//            try context.save()
+//            messages?.append(message)
+//            let item = messages!.count - 1
+//            let insertionIndexPath = IndexPath(item: item, section: 0)
+//            chatTableView.insertRows(at: [insertionIndexPath], with: UITableViewRowAnimation.automatic)
+//            chatTableView.scrollToRow(at: insertionIndexPath, at: .bottom, animated: true)
+//            textField.text = nil
+//        } catch {
+//            print(error)
+//        }
+//    }
     
-    var sendButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Send", for: .normal)
-        button.titleLabel?.font = .boldSystemFont(ofSize: 16)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func handleSend() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
-        guard let text = textField.text else {return}
-        if text.isEmpty {
-            return
-        }
-        let message = UsersVC.createMessageWithText(text: text, user: user!, minutesAgo: 0, context: context, isSender: true)
-        do {
-            try context.save()
-            messages?.append(message)
-            let item = messages!.count - 1
-            let insertionIndexPath = IndexPath(item: item, section: 0)
-            chatTableView.insertRows(at: [insertionIndexPath], with: UITableViewRowAnimation.automatic)
-            chatTableView.scrollToRow(at: insertionIndexPath, at: .bottom, animated: true)
-            textField.text = nil
-        } catch {
-            print(error)
-        }
-    }
-    
-    var borderLine: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(white: 0.5, alpha: 1)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+//    var borderLine: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = UIColor(white: 0.5, alpha: 1)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
+//        textField.delegate = self
         chatTableView.delegate = self
         chatTableView.dataSource = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
@@ -113,7 +113,6 @@ class ChatVC: UIViewController {
         guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
         if notification.name == Notification.Name.UIKeyboardWillShow ||
             notification.name == Notification.Name.UIKeyboardWillChangeFrame {
-//            messageInputContainer.frame.origin.y = -keyboardRect.height
             messageBottomAnchor.constant = -keyboardRect.height
             UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
                 self.view.layoutIfNeeded()
@@ -141,7 +140,7 @@ class ChatVC: UIViewController {
             let insertionIndexPath = IndexPath(item: item, section: 0)
             chatTableView.insertRows(at: [insertionIndexPath], with: UITableViewRowAnimation.automatic)
             chatTableView.scrollToRow(at: insertionIndexPath, at: .bottom, animated: true)
-            textField.text = nil
+            messageText.text = nil
         } catch {
             print(error)
         }
@@ -156,12 +155,14 @@ class ChatVC: UIViewController {
 //            viewWillAppear(true)
 //        }
 //    }
-    var bottomConstraint: NSLayoutConstraint?
+//    var bottomConstraint: NSLayoutConstraint?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        var screen = UIScreen.main.bounds
+//        var screen = UIScreen.main.bounds
         messageText.placeholder = "Enter message..."
+        chatTableView.estimatedRowHeight = 60
+        chatTableView.rowHeight = UITableViewAutomaticDimension
 //        view.addSubview(messageInputContainer)
 //        messageInputContainer.addSubview(textField)
 //        messageInputContainer.addSubview(sendButton)
@@ -199,6 +200,8 @@ class ChatVC: UIViewController {
 
 extension ChatVC: UITableViewDelegate, UITableViewDataSource{
     
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = messages?.count ?? 0
         return num
@@ -229,7 +232,7 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource{
     
 }
 
-extension ChatVC: UITextFieldDelegate {
+extension ChatVC {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false

@@ -16,6 +16,7 @@
 		194C7398208F7D2600ABCAD6 /* Functionallity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194C7397208F7D2600ABCAD6 /* Functionallity.swift */; };
 		198E86B8208A0C00008587A0 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 198E86B6208A0C00008587A0 /* DataModel.xcdatamodeld */; };
 		19AB1193208FD3F300B2C6A0 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB1192208FD3F300B2C6A0 /* FacebookManager.swift */; };
+		19AB119C20907C9500B2C6A0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AB119B20907C9500B2C6A0 /* SettingsVC.swift */; };
 		19EE9FE62088D16D00F19649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE52088D16D00F19649 /* AppDelegate.swift */; };
 		19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EE9FE72088D16D00F19649 /* LoginVC.swift */; };
 		19EE9FEB2088D16D00F19649 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE9FE92088D16D00F19649 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 		194C7397208F7D2600ABCAD6 /* Functionallity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functionallity.swift; sourceTree = "<group>"; };
 		198E86B7208A0C00008587A0 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		19AB1192208FD3F300B2C6A0 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
+		19AB119B20907C9500B2C6A0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		19EE9FE22088D16D00F19649 /* LeoChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LeoChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19EE9FE52088D16D00F19649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19EE9FE72088D16D00F19649 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				194C738F208B3F6D00ABCAD6 /* UsersVC.swift */,
 				194C7391208B3FDA00ABCAD6 /* UserCell.swift */,
 				194C7393208B4CB800ABCAD6 /* ChatVC.swift */,
+				19AB119B20907C9500B2C6A0 /* SettingsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19AB119C20907C9500B2C6A0 /* SettingsVC.swift in Sources */,
 				19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */,
 				194C7383208B355900ABCAD6 /* Message.swift in Sources */,
 				194C7398208F7D2600ABCAD6 /* Functionallity.swift in Sources */,
