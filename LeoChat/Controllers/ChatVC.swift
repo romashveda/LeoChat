@@ -37,6 +37,7 @@ class ChatVC: UIViewController {
         }
     }
     var messages: [Message]?
+    
     var user: User? {
         didSet{
             navigationItem.title = user?.login
@@ -99,6 +100,8 @@ class ChatVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        textField.delegate = self
+        
+        
         chatTableView.delegate = self
         chatTableView.dataSource = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
@@ -198,9 +201,13 @@ class ChatVC: UIViewController {
 
 }
 
+extension ChatVC: UserSelectionDelegate {
+    func userSelected(_ newUser: User) {
+        user = newUser
+    }
+}
+
 extension ChatVC: UITableViewDelegate, UITableViewDataSource{
-    
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let num = messages?.count ?? 0

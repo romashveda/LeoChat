@@ -78,16 +78,19 @@ class LoginVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTabBar" {
-//            let nav = segue.destination as! UINavigationController
             let tab = segue.destination as! UITabBarController
             let splitView = tab.viewControllers![0] as! UISplitViewController
-            
             let splitNav = splitView.viewControllers[0] as! UINavigationController
             let userVC = splitNav.topViewController as! UsersVC
+            let navChatVC = splitView.viewControllers[1] as! UINavigationController
+            let chatVC = navChatVC.topViewController as! ChatVC
             let settingVC = tab.viewControllers![1] as! SettingsVC
+            userVC.delegate = chatVC
             userVC.users = fetchedUsers
             settingVC.currentUser = loginedUser
             userVC.currentUser = loginedUser
+            chatVC.navigationItem.leftItemsSupplementBackButton = true
+            chatVC.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
         }
     }
 
@@ -110,7 +113,7 @@ class LoginVC: UIViewController {
         denys.pass = "1111"
         
         _ = UsersVC.createMessageWithText(text: "Hey, how are you? Will attempt to recover by breaking constraint.", user: vasyl, minutesAgo: 5,context: context)
-        _ = UsersVC.createMessageWithText(text: "What's up? Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.", user: ihor, minutesAgo: 1,context: context)
+        _ = UsersVC.createMessageWithText(text: "What's up? Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.", user: ihor, minutesAgo: 1, context: context)
         _ = UsersVC.createMessageWithText(text: "Hi!", user: vasyl, minutesAgo: 4,context: context)
         _ = UsersVC.createMessageWithText(text: "Brilliant", user: vasyl, minutesAgo: 2,context: context)
         _ = UsersVC.createMessageWithText(text: "I'm fine.", user: vasyl, minutesAgo: 1, context: context, isSender: true)

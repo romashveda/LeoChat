@@ -9,7 +9,13 @@
 import UIKit
 import CoreData
 
+protocol UserSelectionDelegate: class {
+    func userSelected(_ newUser: User)
+}
+
 class UsersVC: UITableViewController {
+    
+    weak var delegate: UserSelectionDelegate?
     
     var users: [User] = []
     var messages: [Message] = []
@@ -70,8 +76,12 @@ extension UsersVC {
         return cell
     }
     
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        chosenUser = users[indexPath.row]
-//        performSegue(withIdentifier: "toChatVC", sender: self)
-//    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        chosenUser = users[indexPath.row]
+        delegate?.userSelected(chosenUser!)
+        if let chatVC = delegate as? ChatVC,
+        let navChatVC = chatVC.navigationController {
+            splitViewController?.showDetailViewController(navChatVC, sender: nil)
+        }
+    }
 }
