@@ -78,10 +78,15 @@ class LoginVC: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTabBar" {
-            let nav = segue.destination as! UINavigationController
-            let tab = nav.topViewController as! UITabBarController
-            let userVC = tab.viewControllers![0] as! UsersVC
+//            let nav = segue.destination as! UINavigationController
+            let tab = segue.destination as! UITabBarController
+            let splitView = tab.viewControllers![0] as! UISplitViewController
+            
+            let splitNav = splitView.viewControllers[0] as! UINavigationController
+            let userVC = splitNav.topViewController as! UsersVC
+            let settingVC = tab.viewControllers![1] as! SettingsVC
             userVC.users = fetchedUsers
+            settingVC.currentUser = loginedUser
             userVC.currentUser = loginedUser
         }
     }

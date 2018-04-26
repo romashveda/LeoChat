@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class UsersVC: UIViewController {
+class UsersVC: UITableViewController {
     
     var users: [User] = []
     var messages: [Message] = []
@@ -38,29 +38,29 @@ class UsersVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        usersTableView.delegate = self
-        usersTableView.dataSource = self
+//        usersTableView.delegate = self
+//        usersTableView.dataSource = self
         tabBarItem.title = "Chats"
         removeCurrentUser()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toChatVC" {
-            let nav = segue.destination as! ChatVC
-            nav.user = chosenUser
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toChatVC" {
+//            let nav = segue.destination as! ChatVC
+//            nav.user = chosenUser
+//        }
+//    }
 
 }
 
-extension UsersVC: UITableViewDelegate, UITableViewDataSource {
+extension UsersVC {
     
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = usersTableView.dequeueReusableCell(withIdentifier: "userCell", for: indexPath) as? UserCell else {
             return UITableViewCell()
         }
@@ -70,8 +70,8 @@ extension UsersVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        chosenUser = users[indexPath.row]
-        performSegue(withIdentifier: "toChatVC", sender: self)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        chosenUser = users[indexPath.row]
+//        performSegue(withIdentifier: "toChatVC", sender: self)
+//    }
 }
