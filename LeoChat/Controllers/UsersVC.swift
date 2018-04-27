@@ -11,6 +11,7 @@ import CoreData
 
 protocol UserSelectionDelegate: class {
     func userSelected(_ newUser: User)
+    func chatSelected(_ newChat: [Message])
 }
 
 class UsersVC: UITableViewController {
@@ -42,21 +43,16 @@ class UsersVC: UITableViewController {
         return message
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        usersTableView.delegate = self
-//        usersTableView.dataSource = self
         tabBarItem.title = "Chats"
         removeCurrentUser()
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toChatVC" {
-//            let nav = segue.destination as! ChatVC
-//            nav.user = chosenUser
-//        }
-//    }
-
 }
 
 extension UsersVC {
@@ -79,9 +75,11 @@ extension UsersVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenUser = users[indexPath.row]
         delegate?.userSelected(chosenUser!)
+//        delegate?.chatSelected(messages)
         if let chatVC = delegate as? ChatVC,
         let navChatVC = chatVC.navigationController {
             splitViewController?.showDetailViewController(navChatVC, sender: nil)
         }
+        
     }
 }

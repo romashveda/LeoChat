@@ -23,6 +23,7 @@
 		19EE9FED2088D17C00F19649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19EE9FEC2088D17C00F19649 /* Assets.xcassets */; };
 		19EE9FF02088D17C00F19649 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19EE9FEE2088D17C00F19649 /* LaunchScreen.storyboard */; };
 		519331644F291AF582A45B13 /* Pods_LeoChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1421843E5B9C2DD207396DA /* Pods_LeoChat.framework */; };
+		97B5C69E20931C6A000C88DD /* PrimarySplitViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B5C69D20931C6A000C88DD /* PrimarySplitViewVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		19EE9FEF2088D17C00F19649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19EE9FF12088D17C00F19649 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2B3C5C06E9398F5094FBE216 /* Pods-LeoChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeoChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-LeoChat/Pods-LeoChat.release.xcconfig"; sourceTree = "<group>"; };
+		97B5C69D20931C6A000C88DD /* PrimarySplitViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimarySplitViewVC.swift; sourceTree = "<group>"; };
 		B1421843E5B9C2DD207396DA /* Pods_LeoChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LeoChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F98DEF1429797A75D1B28DBE /* Pods-LeoChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LeoChat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LeoChat/Pods-LeoChat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 				194C7391208B3FDA00ABCAD6 /* UserCell.swift */,
 				194C7393208B4CB800ABCAD6 /* ChatVC.swift */,
 				19AB119B20907C9500B2C6A0 /* SettingsVC.swift */,
+				97B5C69D20931C6A000C88DD /* PrimarySplitViewVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				19AB119C20907C9500B2C6A0 /* SettingsVC.swift in Sources */,
 				19EE9FE82088D16D00F19649 /* LoginVC.swift in Sources */,
 				194C7383208B355900ABCAD6 /* Message.swift in Sources */,
+				97B5C69E20931C6A000C88DD /* PrimarySplitViewVC.swift in Sources */,
 				194C7398208F7D2600ABCAD6 /* Functionallity.swift in Sources */,
 				194C7390208B3F6D00ABCAD6 /* UsersVC.swift in Sources */,
 				194C7394208B4CB800ABCAD6 /* ChatVC.swift in Sources */,

@@ -59,6 +59,9 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         setupData()
         let loginButton = LoginButton(readPermissions: [ .publicProfile, .email ])
+//        loginButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
+//        loginButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
+//        NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.firstBaseline, relatedBy: NSLayoutRelation.equal, toItem: loginButton, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1000, constant: 20).isActive = true
         loginButton.center = view.center
         view.addSubview(loginButton)
         if let accessToken = AccessToken.current {
@@ -91,6 +94,14 @@ class LoginVC: UIViewController {
             userVC.currentUser = loginedUser
             chatVC.navigationItem.leftItemsSupplementBackButton = true
             chatVC.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
+            for i in 0..<userVC.users.count {
+                if userVC.users[i].login == loginedUser?.login {
+                    userVC.users.remove(at: i)
+                    break
+                }
+            }
+            let firstUser = userVC.users.first
+            chatVC.user = firstUser
         }
     }
 
@@ -117,6 +128,7 @@ class LoginVC: UIViewController {
         _ = UsersVC.createMessageWithText(text: "Hi!", user: vasyl, minutesAgo: 4,context: context)
         _ = UsersVC.createMessageWithText(text: "Brilliant", user: vasyl, minutesAgo: 2,context: context)
         _ = UsersVC.createMessageWithText(text: "I'm fine.", user: vasyl, minutesAgo: 1, context: context, isSender: true)
+        _ = UsersVC.createMessageWithText(text: "What's up", user: denys, minutesAgo: 0, context: context)
         
         do {
             try context.save()

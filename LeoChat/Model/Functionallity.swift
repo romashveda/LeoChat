@@ -8,6 +8,8 @@
 
 import Foundation
 import UserNotifications
+import CoreData
+import UIKit
 
 class Functionallity {
     static var counter = 0
@@ -31,5 +33,10 @@ class Functionallity {
             }
         }
         
+    }
+    
+    static func getContext() ->NSManagedObjectContext {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return NSManagedObjectContext()}
+        return appDelegate.persistentContainer.viewContext
     }
 }

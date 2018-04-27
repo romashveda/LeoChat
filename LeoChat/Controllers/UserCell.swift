@@ -10,12 +10,6 @@ import UIKit
 
 class UserCell: UITableViewCell {
     
-//    override var isHighlighted: Bool {
-//        didSet {
-//            backgroundColor = isHighlighted ? UIColor.blue : UIColor.white
-//        }
-//    }
-    
     @IBOutlet weak var userLabel: UILabel!
     
 }
