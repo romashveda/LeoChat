@@ -12,7 +12,6 @@ import FacebookLogin
 class SettingsVC: UIViewController {
     
     var currentUser: User?
-//    var loggedWithFacebook: Bool?
     
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var loginLabel: UILabel!
@@ -44,10 +43,6 @@ class SettingsVC: UIViewController {
         emailLabel.text = currentUser?.email
         loginLabel.text = currentUser?.login
         logOut.layer.cornerRadius = 15
-//        if loggedWithFacebook! {
-//            logOut.isHidden = true
-//            view.addSubview(logOutButton)
-//        }
         aboutBlock.clipsToBounds = true
         aboutBlock.layer.cornerRadius = 10
     }

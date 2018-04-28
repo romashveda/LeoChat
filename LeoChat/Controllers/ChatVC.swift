@@ -40,30 +40,7 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-//    func refreshFetchController() -> NSFetchedResultsController<NSManagedObject>{
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-//        print(user?.login)
-//        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
-//        let context = Functionallity.getContext()
-//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-//        frc.delegate = self
-//        return frc
-//    }
-    
     var fetchResultController: NSFetchedResultsController<NSManagedObject>!
-    
-//    lazy var fetchResultController: NSFetchedResultsController<NSManagedObject> = {
-//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
-//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-//        print(user?.login)
-//        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
-//        let context = Functionallity.getContext()
-//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-//        frc.delegate = self
-//        return frc
-//    }()
-    
     var blockOperations = [BlockOperation]()
     
     
