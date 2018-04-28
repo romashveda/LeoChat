@@ -16,8 +16,6 @@ class FacebookManager {
     class func basicInfoWithCompletionHandler(_ fromViewController:AnyObject, onCompletion: @escaping LoginCompletionBlock) -> Void {
         
         //Check internet connection if no internet connection then return
-        
-        
         self.getBaicInfoWithCompletionHandler(fromViewController) { (dataDictionary:Dictionary<String, AnyObject>?, error: NSError?) -> Void in
             onCompletion(dataDictionary, error)
         }

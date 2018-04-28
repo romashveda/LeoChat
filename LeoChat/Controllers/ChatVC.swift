@@ -10,6 +10,9 @@ import UIKit
 import CoreData
 
 class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
+    
+    
+    var context = Functionallity.getContext()
 
     @IBOutlet weak var chatTableView: UITableView!
     @IBOutlet weak var messageInputView: UIView!
@@ -18,13 +21,11 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
     @IBOutlet weak var messageBottomAnchor: NSLayoutConstraint!
     
     @IBAction func saveMessage(_ sender: UIButton) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
         guard let text = messageText.text else {return}
         if text.isEmpty {
             return
         }
-        UsersVC.createMessageWithText(text: text, user: user!, minutesAgo: 0, context: context, isSender: true)
+        _ = UsersVC.createMessageWithText(text: text, user: user!, minutesAgo: 0, context: context, isSender: true)
         do {
             try context.save()
             messageText.text = nil
@@ -32,20 +33,31 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
             print(error)
         }
     }
-//    var messages: [Message]?
     
     var user: User? {
         didSet{
             navigationItem.title = user?.login
-            loadViewIfNeeded()
         }
     }
     
+    func refreshFetchController() -> NSFetchedResultsController<NSManagedObject>{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        print(user?.login)
+        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
+        let context = Functionallity.getContext()
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }
+    
+//    var fetchResultController: NSFetchedResultsController<NSManagedObject>!
     
     lazy var fetchResultController: NSFetchedResultsController<NSManagedObject> = {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", self.user!.login!)
+        print(user?.login)
+        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
         let context = Functionallity.getContext()
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         frc.delegate = self
@@ -53,7 +65,6 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
     }()
     
     var blockOperations = [BlockOperation]()
-    
     
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -81,7 +92,7 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
         super.viewDidLoad()
         chatTableView.delegate = self
         chatTableView.dataSource = self
-        
+        fetchResultController.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .done, target: self, action: #selector(simulate))
         
@@ -121,22 +132,11 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
             print(error)
         }
     }
-//    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-//        viewWillAppear(true)
-//        if UIDevice.current.orientation.isLandscape{
-//            screen = UIScreen.main.bounds
-//            viewWillAppear(true)
-//        }else {
-//            screen = UIScreen.main.bounds
-//            viewWillAppear(true)
-//        }
-//    }
-//    var bottomConstraint: NSLayoutConstraint?
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         do {
+            
             try fetchResultController.performFetch()
             print(fetchResultController.sections?[0].numberOfObjects)
         } catch {
@@ -160,10 +160,6 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
 extension ChatVC: UserSelectionDelegate {
     func userSelected(_ newUser: User) {
         user = newUser
-    }
-    func chatSelected(_ newChat: [Message]) {
-//        messages = newChat
-//        messages = messages?.sorted{$0.date! < $1.date!}
     }
 }
 

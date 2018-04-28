@@ -11,7 +11,6 @@ import CoreData
 
 protocol UserSelectionDelegate: class {
     func userSelected(_ newUser: User)
-    func chatSelected(_ newChat: [Message])
 }
 
 class UsersVC: UITableViewController {
@@ -75,11 +74,16 @@ extension UsersVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenUser = users[indexPath.row]
         delegate?.userSelected(chosenUser!)
-//        delegate?.chatSelected(messages)
         if let chatVC = delegate as? ChatVC,
         let navChatVC = chatVC.navigationController {
             splitViewController?.showDetailViewController(navChatVC, sender: nil)
         }
         
     }
+}
+
+class UserCell: UITableViewCell {
+    
+    @IBOutlet weak var userLabel: UILabel!
+    
 }

@@ -10,8 +10,18 @@ import UIKit
 import FacebookLogin
 import FacebookCore
 import CoreData
+import FBSDKLoginKit
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        performSegue(withIdentifier: "toTabBar", sender: self)
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+    }
+    
     
     var fetchedUsers = [User]()
     var loginedUser: User?
@@ -52,21 +62,21 @@ class LoginVC: UIViewController {
         loginTextField.textAlignment = .center
         passTextField.placeholder = "Password"
         passTextField.textAlignment = .center
-        
     }
+    var loggedWithFacebook = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
-        let loginButton = LoginButton(readPermissions: [ .publicProfile, .email ])
-//        loginButton.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor).isActive = true
-//        loginButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor).isActive = true
-//        NSLayoutConstraint(item: loginButton, attribute: NSLayoutAttribute.firstBaseline, relatedBy: NSLayoutRelation.equal, toItem: loginButton, attribute: NSLayoutAttribute.lastBaseline, multiplier: 1000, constant: 20).isActive = true
+        let loginButton = FBSDKLoginButton()
+        loginButton.readPermissions = ["public_profile", "email" ]
+//            LoginButton(readPermissions: [ .publicProfile, .email ])
         loginButton.center = view.center
         view.addSubview(loginButton)
-        if let accessToken = AccessToken.current {
+        if let accessToken = FBSDKAccessToken.current(){
             print("User logged")
-            print(accessToken.userId!)
+            print(accessToken.appID)
+            loggedWithFacebook = true
             performSegue(withIdentifier: "toTabBar", sender: self)
             // User is logged in, use 'accessToken' here.
             // go to next VC
@@ -76,7 +86,17 @@ class LoginVC: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         loginTextField.delegate = self
         passTextField.delegate = self
+        loginButton.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        viewWillAppear(true)
+        if UIDevice.current.orientation.isLandscape{
+            viewWillAppear(true)
+        }else {
+            viewWillAppear(true)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -91,6 +111,7 @@ class LoginVC: UIViewController {
             userVC.delegate = chatVC
             userVC.users = fetchedUsers
             settingVC.currentUser = loginedUser
+            settingVC.loggedWithFacebook = loggedWithFacebook
             userVC.currentUser = loginedUser
             chatVC.navigationItem.leftItemsSupplementBackButton = true
             chatVC.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
@@ -107,12 +128,10 @@ class LoginVC: UIViewController {
 
     func setupData() {
         clearData()
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
-        
+        let context = Functionallity.getContext()
         let vasyl = User(context: context)
         vasyl.login = "Vasyl Borovets"
-        vasyl.email = "1@gmail.com"
+        vasyl.email = "borovets@gmail.com"
         vasyl.pass = "1111"
         let ihor = User(context: context)
         ihor.login = "Ihor Avramenko"
@@ -120,8 +139,12 @@ class LoginVC: UIViewController {
         ihor.pass = "1111"
         let denys = User(context: context)
         denys.login = "Denys Melnyk"
-        denys.email = "3@gmail.com"
+        denys.email = "melnyk@gmail.com"
         denys.pass = "1111"
+        let anton = User(context: context)
+        anton.login = "Anton Pavlov"
+        anton.email = "pavlov@gmail.com"
+        anton.pass = "1111"
         
         _ = UsersVC.createMessageWithText(text: "Hey, how are you? Will attempt to recover by breaking constraint.", user: vasyl, minutesAgo: 5,context: context)
         _ = UsersVC.createMessageWithText(text: "What's up? Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.", user: ihor, minutesAgo: 1, context: context)
@@ -129,6 +152,7 @@ class LoginVC: UIViewController {
         _ = UsersVC.createMessageWithText(text: "Brilliant", user: vasyl, minutesAgo: 2,context: context)
         _ = UsersVC.createMessageWithText(text: "I'm fine.", user: vasyl, minutesAgo: 1, context: context, isSender: true)
         _ = UsersVC.createMessageWithText(text: "What's up", user: denys, minutesAgo: 0, context: context)
+        _ = UsersVC.createMessageWithText(text: "Hello", user: anton, minutesAgo: 0, context: context)
         
         do {
             try context.save()
@@ -140,8 +164,7 @@ class LoginVC: UIViewController {
     }
     
     func fetchUsers() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
+        let context = Functionallity.getContext()
         let request = NSFetchRequest<NSManagedObject>(entityName: "User")
         do {
             let users = try context.fetch(request) as! [User]
@@ -152,8 +175,7 @@ class LoginVC: UIViewController {
     }
     
     func clearData() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
+        let context = Functionallity.getContext()
         let entities = ["Message","User"]
         for entity in entities {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entity)
