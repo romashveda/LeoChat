@@ -11,9 +11,10 @@ import CoreData
 
 protocol UserSelectionDelegate: class {
     func userSelected(_ newUser: User)
+    func fetchControllerDelegated(_ controller: NSFetchedResultsController<NSManagedObject>)
 }
 
-class UsersVC: UITableViewController {
+class UsersVC: UITableViewController, NSFetchedResultsControllerDelegate{
     
     weak var delegate: UserSelectionDelegate?
     
@@ -31,6 +32,17 @@ class UsersVC: UITableViewController {
                 break
             }
         }
+    }
+    
+    func refreshFetchController() -> NSFetchedResultsController<NSManagedObject>{
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        print(chosenUser?.login)
+        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", chosenUser!.login!)
+        let context = Functionallity.getContext()
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
     }
     
     static func createMessageWithText(text: String, user: User, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) -> Message{
@@ -74,6 +86,7 @@ extension UsersVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         chosenUser = users[indexPath.row]
         delegate?.userSelected(chosenUser!)
+        delegate?.fetchControllerDelegated(refreshFetchController())
         if let chatVC = delegate as? ChatVC,
         let navChatVC = chatVC.navigationController {
             splitViewController?.showDetailViewController(navChatVC, sender: nil)

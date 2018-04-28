@@ -40,29 +40,29 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
         }
     }
     
-    func refreshFetchController() -> NSFetchedResultsController<NSManagedObject>{
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        print(user?.login)
-        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
-        let context = Functionallity.getContext()
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
-        return frc
-    }
+//    func refreshFetchController() -> NSFetchedResultsController<NSManagedObject>{
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+//        print(user?.login)
+//        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
+//        let context = Functionallity.getContext()
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        frc.delegate = self
+//        return frc
+//    }
     
-//    var fetchResultController: NSFetchedResultsController<NSManagedObject>!
+    var fetchResultController: NSFetchedResultsController<NSManagedObject>!
     
-    lazy var fetchResultController: NSFetchedResultsController<NSManagedObject> = {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        print(user?.login)
-        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
-        let context = Functionallity.getContext()
-        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
-        return frc
-    }()
+//    lazy var fetchResultController: NSFetchedResultsController<NSManagedObject> = {
+//        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Message")
+//        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+//        print(user?.login)
+//        fetchRequest.predicate = NSPredicate(format: "userTo.login = %@", user!.login!)
+//        let context = Functionallity.getContext()
+//        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+//        frc.delegate = self
+//        return frc
+//    }()
     
     var blockOperations = [BlockOperation]()
     
@@ -120,9 +120,6 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
     }
     
     @objc func simulate() {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        let context = appDelegate.persistentContainer.viewContext
-        
         let message = UsersVC.createMessageWithText(text: "Message simulation.", user: user!, minutesAgo: 0, context: context)
         do {
             try context.save()
@@ -136,7 +133,6 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         do {
-            
             try fetchResultController.performFetch()
             print(fetchResultController.sections?[0].numberOfObjects)
         } catch {
@@ -146,6 +142,7 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
         messageText.placeholder = "Enter message..."
         chatTableView.estimatedRowHeight = 60
         chatTableView.rowHeight = UITableViewAutomaticDimension
+        chatTableView.reloadData()
     }
 
     deinit {
@@ -160,6 +157,9 @@ class ChatVC: UIViewController, NSFetchedResultsControllerDelegate {
 extension ChatVC: UserSelectionDelegate {
     func userSelected(_ newUser: User) {
         user = newUser
+    }
+    func fetchControllerDelegated(_ controller: NSFetchedResultsController<NSManagedObject>) {
+        fetchResultController = controller
     }
 }
 

@@ -63,40 +63,31 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
         passTextField.placeholder = "Password"
         passTextField.textAlignment = .center
     }
-    var loggedWithFacebook = false
+//    var loggedWithFacebook = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
-        let loginButton = FBSDKLoginButton()
-        loginButton.readPermissions = ["public_profile", "email" ]
-//            LoginButton(readPermissions: [ .publicProfile, .email ])
-        loginButton.center = view.center
-        view.addSubview(loginButton)
-        if let accessToken = FBSDKAccessToken.current(){
-            print("User logged")
-            print(accessToken.appID)
-            loggedWithFacebook = true
-            performSegue(withIdentifier: "toTabBar", sender: self)
-            // User is logged in, use 'accessToken' here.
-            // go to next VC
-        } else {
-            print("User not logged")
-        }
+//        let loginButton = FBSDKLoginButton()
+//        loginButton.readPermissions = ["public_profile", "email" ]
+////            LoginButton(readPermissions: [ .publicProfile, .email ])
+//        loginButton.center = view.center
+//        view.addSubview(loginButton)
+//        if let accessToken = FBSDKAccessToken.current(){
+//            print("User logged")
+//            print(accessToken.appID)
+//            loggedWithFacebook = true
+//            performSegue(withIdentifier: "toTabBar", sender: self)
+//            // User is logged in, use 'accessToken' here.
+//            // go to next VC
+//        } else {
+//            print("User not logged")
+//        }
         self.navigationController?.isNavigationBarHidden = true
         loginTextField.delegate = self
         passTextField.delegate = self
-        loginButton.delegate = self
+//        loginButton.delegate = self
         self.hideKeyboardOnTap(#selector(self.dismissKeyboard))
-    }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        viewWillAppear(true)
-        if UIDevice.current.orientation.isLandscape{
-            viewWillAppear(true)
-        }else {
-            viewWillAppear(true)
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,7 +102,7 @@ class LoginVC: UIViewController, FBSDKLoginButtonDelegate {
             userVC.delegate = chatVC
             userVC.users = fetchedUsers
             settingVC.currentUser = loginedUser
-            settingVC.loggedWithFacebook = loggedWithFacebook
+//            settingVC.loggedWithFacebook = loggedWithFacebook
             userVC.currentUser = loginedUser
             chatVC.navigationItem.leftItemsSupplementBackButton = true
             chatVC.navigationItem.leftBarButtonItem = splitView.displayModeButtonItem
